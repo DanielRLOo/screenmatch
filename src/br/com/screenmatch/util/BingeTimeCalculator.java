@@ -1,6 +1,6 @@
 package br.com.screenmatch.util;
 
-import br.com.screenmatch.model.watchable.Watchable;
+import br.com.screenmatch.model.Media;
 
 public class BingeTimeCalculator {
     private static int totalMinutes = 0;
@@ -15,16 +15,16 @@ public class BingeTimeCalculator {
     private BingeTimeCalculator() {
     }
 
-    public static String calculate(Watchable[] watchables) {
-        extractRunTime(watchables);
+    public static String calculate(Media[] media) {
+        extractRunTime(media);
         calculateRunTime();
         buildResult();
         return result;
     }
 
-    private static void extractRunTime(Watchable[] watchables) {
-        for (Watchable watchable : watchables) {
-            String[] lengthParts = watchable.length().split(" ");
+    private static void extractRunTime(Media[] media) {
+        for (Media medium : media) {
+            String[] lengthParts = medium.length().split(" ");
             for (int i = 0; i < lengthParts.length; i++) {
                 if (lengthParts[i].contains("hour")) {
                     totalHours += Integer.parseInt(lengthParts[i - 1]);

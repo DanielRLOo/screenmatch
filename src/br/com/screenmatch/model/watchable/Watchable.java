@@ -1,12 +1,15 @@
 package br.com.screenmatch.model.watchable;
 
-public class Watchable {
+import br.com.screenmatch.model.Media;
+
+public class Watchable implements Media{
     
     // Object attributes
     private String name;
     private String genre;
     private String length;
     private int year;
+    private boolean watched = false;
 
     // Class internal attributes
     private int ratingsSum;
@@ -31,8 +34,13 @@ public class Watchable {
         return length;
     }
 
-    public double rating() {
-        return ratingsSum == 0 ? 0 : ratingsSum / ratingsCount;
+    public String rating() {
+        int count = ratingsSum == 0 ? 0 : ratingsSum / ratingsCount;
+        StringBuilder stars = new StringBuilder();
+        for (int i = 0; i < count; i++) {
+            stars.append("*");
+        }
+        return stars.toString();
     }
 
     public int year() {
@@ -52,7 +60,7 @@ public class Watchable {
     }
 
     public String info() {
-        return "Movie: " + name + "\n" +
+        return "Media: " + name + "\n" +
                 "Genre: " + genre + "\n" +
                 "Length: " + length + "\n" +
                 "Year: " + year + "\n" +
@@ -62,5 +70,13 @@ public class Watchable {
 
     public void printInfo() {
         System.out.println(info());
+    }
+
+    public boolean isWatched() {
+        return watched;
+    }
+
+    public void watch(boolean watched) {
+        this.watched = watched;
     }
 }
